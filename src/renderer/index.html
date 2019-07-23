@@ -1,0 +1,44 @@
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="./index.css">
+    </head>
+    <body id="window">
+        <header id="window-titlebar">
+			<div id="window-extra">
+				<div class="button" id="reload-button"><img src="../assets/reload.svg" width="14" /></div>
+			</div>
+		
+            <div id="window-controls">
+                <div class="button" id="min-button">
+                    <span>&#xE921;</span>
+                </div>
+                <div class="button" id="max-button">
+                    <span>&#xE922;</span>
+                </div>
+                <div class="button" id="restore-button">
+                    <span>&#xE923;</span>
+                </div>
+                <div class="button" id="close-button">
+                    <span>&#xE8BB;</span>
+                </div>
+            </div>
+        </header>
+        
+        <main id="window-main">
+			<webview id="window-iframe" src="https://oxem-quest.fr/"></webview>
+        </main>
+        
+        <script>
+            switch (process.platform)
+            {
+                case 'win32':
+                    document.write('<link rel="stylesheet" type="text/css" href="./css/windows.css">');
+                    break;
+                case 'darwin':
+                    document.write('<link rel="stylesheet" type="text/css" href="./css/darwin.css">');
+                    break;
+            }
+            require('./index.js')
+        </script>
+    </body>
+</html>

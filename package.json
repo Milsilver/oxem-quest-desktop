@@ -1,0 +1,39 @@
+{
+  "name": "oxem-quest-desktop",
+  "description": "Oxem Quest est un idle game gratuit avec un aspect mmorpg et une intégration YouTube/Twitch.",
+  "version": "0.0.1",
+  "author": "Exoway",
+  "license": "MIT",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder",
+    "postinstall": "electron-builder install-app-deps",
+    "release": "electron-builder -p always"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Exoway/oxem-quest-desktop.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Exoway/oxem-quest-desktop/issues"
+  },
+  "build": {
+    "appId": "net.exoway.oxem.quest.desktop",
+    "productName": "Oxem Quest",
+    "copyright": "© 2019 Exoway. All rights reserved.",
+    "publish": [
+      "github"
+    ]
+  },
+  "dependencies": {
+    "electron-updater": "^4.1.2"
+  },
+  "devDependencies": {
+    "electron": "5.0.7",
+    "electron-builder": "^21.1.1"
+  },
+  "homepage": "https://oxem-quest.fr",
+  "keywords": []
+}

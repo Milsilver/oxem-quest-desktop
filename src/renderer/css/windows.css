@@ -1,0 +1,27 @@
+/* Windows Only */
+#window-controls {
+    display: grid;
+    grid-template-columns: repeat(3, 46px);
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    font-family: "Segoe MDL2 Assets";
+    font-size: 10px;
+}
+#window-controls #min-button {
+    grid-column: 1;
+}
+#window-controls #max-button, #window-controls #restore-button {
+    grid-column: 2;
+}
+#window-controls #close-button {
+    grid-column: 3;
+}
+
+#window-controls #close-button:hover {
+    background: #E81123;
+}
+#window-controls #restore-button {
+    display: none;
+}

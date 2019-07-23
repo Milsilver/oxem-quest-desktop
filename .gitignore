@@ -1,0 +1,9 @@
+.DS_Store
+dist/
+node_modules/
+thumbs.db
+.idea/
+package-lock.json
+/release-builds
+package-lock.json
+release.bat
