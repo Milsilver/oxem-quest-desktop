@@ -3,6 +3,11 @@ body#window {
     padding: 0;
     
     overflow-y: hidden;
+	background: #211943;
+}
+
+.hide {
+	visibility: hidden;
 }
 
 #window-titlebar {
@@ -12,7 +17,6 @@ body#window {
     font-size: 12px;
 
     top: 0; left: 0; right: 0;
-    background: #211943;
     
     -webkit-user-select: none;
     -webkit-app-region: drag;
@@ -61,4 +65,13 @@ webview {
     height: 100%;
     width: 100%;
 	border: none;
+}
+
+#webview-spinner {
+	width: 42px;
+	height: 42px;
+	
+	position: fixed;
+	left: calc(50vw - 42px / 2);
+	top: calc(50vh - 42px / 2);
 }

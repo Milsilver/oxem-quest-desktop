@@ -70,10 +70,17 @@ const {Menu, MenuItem} = remote;
 			// So create fake PiP feature
         });*/
 		
+		iframe.addEventListener('did-start-loading', function(e) {
+			document.getElementById('webview-spinner').classList.remove('hide');
+		});
+		
+		iframe.addEventListener('did-stop-loading', function(e) {
+			document.getElementById('webview-spinner').classList.add('hide');
+		});
+		
 		iframe.addEventListener('dom-ready', function(e) {
 			// For Debug only
 			// iframe.openDevTools();
-
 			if (ipcRenderer.sendSync('isFirstRun')) {
 				iframe.setZoomFactor(0.9);
 			}
