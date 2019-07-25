@@ -1,6 +1,6 @@
 'use strict';
 
-const {app, BrowserWindow, shell} = require('electron');
+const {app, BrowserWindow, shell, ipcMain} = require('electron');
 const { autoUpdater } = require('electron-updater');
 const path = require('path');
 
@@ -52,6 +52,11 @@ app.on('activate', () => {
 app.on('ready', () => {
 	autoUpdater.checkForUpdatesAndNotify();
     mainWindow = createMainWindow();
+});
+
+// IPC
+ipcMain.on('checkForUpdatesAndNotify', (event, arg) => {
+	autoUpdater.checkForUpdatesAndNotify();
 });
 
 // Auto Update

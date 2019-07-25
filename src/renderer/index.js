@@ -1,12 +1,8 @@
 // This file is required by the index.html file and will
 // be executed in the renderer process for that window.
 // All of the Node.js APIs are available in this process.
-const {shell, remote} = require('electron');
-
-function reloadIframe() {
-	document.getElementById('window-iframe').contentDocument.location.reload(true);
-	console.log("call");
-}
+const {shell, remote, ipcRenderer} = require('electron');
+const {Menu, MenuItem} = remote;
 
 (function handleWindowControls() {
     // When document has loaded, initialise
@@ -20,12 +16,50 @@ function reloadIframe() {
         let window = remote.getCurrentWindow();
         const iframe = document.getElementById('window-iframe'),
 			pictureInPictureButton = document.getElementById('picture-in-picture-button'),
+			optionButton =  document.getElementById('option-button'),
 			reloadButton = document.getElementById('reload-button'),
 			minButton = document.getElementById('min-button'),
             maxButton = document.getElementById('max-button'),
             restoreButton = document.getElementById('restore-button'),
             closeButton = document.getElementById('close-button');
 
+		// Menu
+		const menu = new Menu();
+		const viewMenuItem = new MenuItem({
+			label: 'Zoom',
+			type: 'submenu',
+			submenu: [
+				{
+					label: 'Défaut',
+					role: 'resetzoom'
+				},
+				{
+					label: 'Agrandir',
+					role: 'zoomin'
+				},
+				{
+					label: 'Réduire',
+					role: 'zoomout'
+				}
+			]
+		});
+		menu.append(viewMenuItem);
+		
+		const updateMenuItem = new MenuItem({
+			label: 'Recherche mise à jour',
+			click: () => {
+				ipcRenderer.send('checkForUpdatesAndNotify');
+			}
+		});
+		menu.append(updateMenuItem);
+		
+		const exitMenuItem = new MenuItem({
+			label: 'Quitter',
+			role: 'quit'
+		});
+		menu.append(exitMenuItem);
+
+		// Header
 		/*pictureInPictureButton.addEventListener("click", event => {
 			// Picture in Picture is not available in Electron (requestPictureInPicture) - See https://github.com/electron/electron/pull/17686
 			// So create fake PiP feature
@@ -37,6 +71,10 @@ function reloadIframe() {
 		iframe.addEventListener('new-window', function(e) {
 			shell.openExternal(e.url);
 		});
+
+		optionButton.addEventListener("click", event => {
+			menu.popup(remote.getCurrentWindow())
+        });
 
 		reloadButton.addEventListener("click", event => {
             iframe.reload();
