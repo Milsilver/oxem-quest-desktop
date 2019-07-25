@@ -1,16 +1,17 @@
 'use strict';
 
 const {app, BrowserWindow, shell, ipcMain} = require('electron');
-const { autoUpdater } = require('electron-updater');
+const {autoUpdater} = require('electron-updater');
 const path = require('path');
+const firstRun = require('electron-first-run');
 
 // Global reference to mainWindow
 let mainWindow;
 
 function createMainWindow() {
     let window = new BrowserWindow({
-        width: 1080,
-        height: 720,
+        width: 1600,
+        height: 900,
         frame: false,
 		icon: path.join(__dirname, 'assets/icon.png'),
         webPreferences: {
@@ -57,6 +58,10 @@ app.on('ready', () => {
 // IPC
 ipcMain.on('checkForUpdatesAndNotify', (event, arg) => {
 	autoUpdater.checkForUpdatesAndNotify();
+});
+
+ipcMain.on('isFirstRun', (event, arg) => {
+	event.returnValue = firstRun();
 });
 
 // Auto Update

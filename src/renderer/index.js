@@ -30,6 +30,12 @@ const {Menu, MenuItem} = remote;
 			submenu: [
 				{
 					label: 'Défaut',
+					click: () => {
+						iframe.setZoomFactor(0.9);
+					}
+				},
+				{
+					label: 'Normal',
 					role: 'resetzoom'
 				},
 				{
@@ -67,6 +73,10 @@ const {Menu, MenuItem} = remote;
 		iframe.addEventListener('dom-ready', function(e) {
 			// For Debug only
 			// iframe.openDevTools();
+
+			if (ipcRenderer.sendSync('isFirstRun')) {
+				iframe.setZoomFactor(0.9);
+			}
 			
 			iframe.insertCSS(`
 				#chatbox #oxem-quest-desktop {
