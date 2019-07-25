@@ -1,6 +1,5 @@
 // This file is required by the index.html file and will
 // be executed in the renderer process for that window.
-// All of the Node.js APIs are available in this process.
 const {shell, remote, ipcRenderer} = require('electron');
 const {Menu, MenuItem} = remote;
 
@@ -65,33 +64,41 @@ const {Menu, MenuItem} = remote;
 			// So create fake PiP feature
         });*/
 		
-		// For Debug only
-		// iframe.webContents.openDevTools();
+		iframe.addEventListener('dom-ready', function(e) {
+			// For Debug only
+			// iframe.openDevTools();
+			
+			iframe.insertCSS(`
+				#chatbox #oxem-quest-desktop {
+					display: none !important;
+				}
+			`);
+		});
 		
 		iframe.addEventListener('new-window', function(e) {
 			shell.openExternal(e.url);
 		});
 
-		optionButton.addEventListener("click", event => {
+		optionButton.addEventListener('click', event => {
 			menu.popup(remote.getCurrentWindow())
         });
 
-		reloadButton.addEventListener("click", event => {
+		reloadButton.addEventListener('click', event => {
             iframe.reload();
         });
 
-        minButton.addEventListener("click", event => {
+        minButton.addEventListener('click', event => {
             window = remote.getCurrentWindow();
             window.minimize();
         });
 
-        maxButton.addEventListener("click", event => {
+        maxButton.addEventListener('click', event => {
             window = remote.getCurrentWindow();
             window.maximize();
             toggleMaxRestoreButtons();
         });
 
-        restoreButton.addEventListener("click", event => {
+        restoreButton.addEventListener('click', event => {
             window = remote.getCurrentWindow();
             window.unmaximize();
             toggleMaxRestoreButtons();
@@ -112,11 +119,11 @@ const {Menu, MenuItem} = remote;
         function toggleMaxRestoreButtons() {
             window = remote.getCurrentWindow();
             if (window.isMaximized()) {
-                maxButton.style.display = "none";
-                restoreButton.style.display = "flex";
+                maxButton.style.display = 'none';
+                restoreButton.style.display = 'flex';
             } else {
-                restoreButton.style.display = "none";
-                maxButton.style.display = "flex";
+                restoreButton.style.display = 'none';
+                maxButton.style.display = 'flex';
             }
         }
     }
