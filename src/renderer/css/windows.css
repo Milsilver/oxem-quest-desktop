@@ -2,7 +2,6 @@
 #window-controls {
     display: grid;
     grid-template-columns: repeat(3, 46px);
-    position: absolute;
     top: 0;
     right: 0;
     height: 100%;

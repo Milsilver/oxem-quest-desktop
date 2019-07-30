@@ -13,10 +13,12 @@ const {Menu, MenuItem} = remote;
 
     function init() {
         let window = remote.getCurrentWindow();
+		let toastTimeoutManager;
         const iframe = document.getElementById('window-iframe'),
 			pictureInPictureButton = document.getElementById('picture-in-picture-button'),
 			optionButton =  document.getElementById('option-button'),
 			reloadButton = document.getElementById('reload-button'),
+			toastDiv = document.getElementById('window-toast'),
 			minButton = document.getElementById('min-button'),
             maxButton = document.getElementById('max-button'),
             restoreButton = document.getElementById('restore-button'),
@@ -97,6 +99,17 @@ const {Menu, MenuItem} = remote;
 			document.getElementById('changelog').classList.add('active');
 			document.getElementById('overlay').classList.add('active');
 		}
+		
+		ipcRenderer.on('toast', function(event, data) {
+			clearTimeout(toastTimeoutManager);
+			toastDiv.innerHTML = data.text;
+			toastDiv.classList.add('active');
+			
+			toastTimeoutManager = setTimeout(function() {
+				toastDiv.innerHTML = '';
+				toastDiv.classList.remove('active');
+			}, data.duration);
+		});
 		
 		iframe.addEventListener('did-start-loading', function(e) {
 			document.getElementById('webview-spinner').classList.remove('hide');
