@@ -20,7 +20,9 @@ const {Menu, MenuItem} = remote;
 			minButton = document.getElementById('min-button'),
             maxButton = document.getElementById('max-button'),
             restoreButton = document.getElementById('restore-button'),
-            closeButton = document.getElementById('close-button');
+            closeButton = document.getElementById('close-button'),
+			overlay = document.getElementById('overlay'),
+			modalCloseButton = document.getElementsByClassName('modal-close');
 
 		// Menu
 		const menu = new Menu();
@@ -50,6 +52,15 @@ const {Menu, MenuItem} = remote;
 		});
 		menu.append(viewMenuItem);
 		
+		const changelogMenuItem = new MenuItem({
+			label: 'Changelog',
+			click: () => {
+				document.getElementById('changelog').classList.add('active');
+				document.getElementById('overlay').classList.add('active');
+			}
+		});
+		menu.append(changelogMenuItem);
+		
 		const updateMenuItem = new MenuItem({
 			label: 'Recherche mise à jour',
 			click: () => {
@@ -69,6 +80,23 @@ const {Menu, MenuItem} = remote;
 			// Picture in Picture is not available in Electron (requestPictureInPicture) - See https://github.com/electron/electron/pull/17686
 			// So create fake PiP feature
         });*/
+		
+		for (i = 0; i < modalCloseButton.length; i++) {
+			modalCloseButton[i].addEventListener('click', event => {
+				document.getElementById('changelog').classList.remove('active');
+				document.getElementById('overlay').classList.remove('active');
+			});
+		}
+		
+		overlay.addEventListener('click', event => {
+			document.getElementById('changelog').classList.remove('active');
+			document.getElementById('overlay').classList.remove('active');
+		});
+		
+		if (ipcRenderer.sendSync('isFirstRun')) {
+			document.getElementById('changelog').classList.add('active');
+			document.getElementById('overlay').classList.add('active');
+		}
 		
 		iframe.addEventListener('did-start-loading', function(e) {
 			document.getElementById('webview-spinner').classList.remove('hide');
