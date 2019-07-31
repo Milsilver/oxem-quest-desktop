@@ -7,3 +7,4 @@ package-lock.json
 /release-builds
 package-lock.json
 release.bat
+release.sh
