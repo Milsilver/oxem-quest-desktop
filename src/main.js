@@ -13,19 +13,19 @@ function createMainWindow() {
         width: 1600,
         height: 900,
         frame: false,
-		icon: path.join(__dirname, 'assets/icon.png'),
+        icon: path.join(__dirname, 'assets/icon.png'),
         webPreferences: {
-			webviewTag: true,
+            webviewTag: true,
             nodeIntegration: true
         }
     });
     
     window.setMenu(null);
     window.loadFile(path.join(__dirname, 'renderer/index.html'));
-	
+
     // Uncomment to use Chrome developer tools
     // window.webContents.openDevTools();
-	
+
     // Cleanup when window is closed
     window.on('closed', function() {
         window = null;
@@ -57,8 +57,8 @@ app.on('ready', () => {
 
 // IPC
 const sendStatusToWindow = (text, duration = 3000) => {
-	if (mainWindow)
-		mainWindow.webContents.send('toast', {text, duration});
+    if (mainWindow)
+        mainWindow.webContents.send('toast', {text, duration});
 };
 
 ipcMain.on('checkForUpdatesAndNotify', (event, arg) => {
@@ -87,12 +87,12 @@ autoUpdater.on('error', err => {
 });
 
 autoUpdater.on('download-progress', progress => {
-	sendStatusToWindow(
-		`Téléchargement en cours: ${progressObj.bytesPerSecond} - Avancement ${progressObj.percent}% (${progressObj.transferred} + '/' + ${progressObj.total} + )`
-	);
+    sendStatusToWindow(
+        `Téléchargement en cours: ${progressObj.bytesPerSecond} - Avancement ${progressObj.percent}% (${progressObj.transferred} + '/' + ${progressObj.total} + )`
+    );
 });
 
 autoUpdater.on('update-downloaded', info => {
-	sendStatusToWindow('Téléchargement de la mise à jour fini. Installation ...');
-	autoUpdater.quitAndInstall();
+    sendStatusToWindow('Téléchargement de la mise à jour fini. Installation ...');
+    autoUpdater.quitAndInstall();
 });

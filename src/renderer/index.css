@@ -24,6 +24,7 @@ body#window {
     
     -webkit-user-select: none;
     -webkit-app-region: drag;
+    text-align: center;
 }
 
 #window-toast {
@@ -40,12 +41,10 @@ body#window {
 	overflow: hidden;
 	transition: margin 0.3s ease-in-out;
 	margin-top: -24px;
-	visibility: hidden;
 }
 	#window-toast.active {
 		transition: margin 0.3s ease-in-out;
 		margin-top: 0px;
-		visibility: visible;
 	}
 
 #window-controls .button, #window-extra .button {
