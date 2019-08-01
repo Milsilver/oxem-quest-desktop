@@ -1,7 +1,7 @@
 {
   "name": "oxem-quest-desktop",
   "description": "Oxem Quest est un idle game gratuit avec un aspect mmorpg et une intégration YouTube/Twitch.",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "author": {
     "name": "Exoway",
     "email": "contact@exoway.net",
@@ -36,8 +36,8 @@
     "electron-updater": "^4.1.2"
   },
   "devDependencies": {
-    "electron": "^5.0.8",
-    "electron-builder": "^21.1.5"
+    "electron": "^6.0.0",
+    "electron-builder": "^21.2.0"
   },
   "homepage": "https://oxem-quest.fr",
   "keywords": []
