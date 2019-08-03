@@ -54,15 +54,6 @@ const {Menu, MenuItem} = remote;
 		});
 		menu.append(viewMenuItem);
 		
-		const changelogMenuItem = new MenuItem({
-			label: 'Changelog',
-			click: () => {
-				document.getElementById('changelog').classList.add('active');
-				document.getElementById('overlay').classList.add('active');
-			}
-		});
-		menu.append(changelogMenuItem);
-		
 		const updateMenuItem = new MenuItem({
 			label: 'Recherche mise à jour',
 			click: () => {
