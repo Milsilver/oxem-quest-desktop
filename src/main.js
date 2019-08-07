@@ -81,7 +81,7 @@ autoUpdater.on('error', err => {
 
 autoUpdater.on('download-progress', progress => {
     sendStatusToWindow(
-        `Téléchargement en cours: ${progressObj.bytesPerSecond} - Avancement ${progressObj.percent}% (${progressObj.transferred} + '/' + ${progressObj.total} + )`
+        `Téléchargement en cours: ${progress.bytesPerSecond} - Avancement ${progress.percent}% (${progress.transferred} + '/' + ${progress.total} + )`
     );
 });
 
