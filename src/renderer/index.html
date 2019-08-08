@@ -43,11 +43,11 @@
         <script>
             switch (process.platform)
             {
-                case 'win32':
-                    document.write('<link rel="stylesheet" type="text/css" href="./css/windows.css">');
-                    break;
                 case 'darwin':
                     document.write('<link rel="stylesheet" type="text/css" href="./css/darwin.css">');
+                    break;
+				default:
+					document.write('<link rel="stylesheet" type="text/css" href="./css/windows.css">');
                     break;
             }
             require('./index.js')

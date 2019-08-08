@@ -54,6 +54,40 @@ const {Menu, MenuItem} = remote;
 		});
 		menu.append(viewMenuItem);
 		
+		const navigationMenuItem = new MenuItem({
+			label: 'Navigation',
+			type: 'submenu',
+			submenu: [
+				{
+					label: 'Arrière',
+					click: () => {
+						if (iframe.canGoBack())
+							iframe.goBack();
+					}
+				},
+				{
+					label: 'Avant',
+					click: () => {
+						if (iframe.canGoForward())
+							iframe.goForward();
+					}
+				},
+				{
+					label: 'Recharger',
+					click: () => {
+						iframe.reload();
+					}
+				},
+				{
+					label: 'Défaut',
+					click: () => {
+						iframe.loadURL('https://oxem-quest.fr/');
+					}
+				}
+			]
+		});
+		menu.append(navigationMenuItem);
+		
 		const updateMenuItem = new MenuItem({
 			label: 'Recherche mise à jour',
 			click: () => {
